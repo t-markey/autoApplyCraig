@@ -1,1 +1,2 @@
 Testing push file # 1 
+Merged branch now editing again
