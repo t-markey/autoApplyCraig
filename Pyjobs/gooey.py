@@ -1,0 +1,124 @@
+import tkinter as tk
+from tkinter import *
+from tkinter import filedialog
+import webbrowser
+import emailtesting as emm
+
+goo = tk.Tk(className=' AutoCraig v 1.3')
+goo.geometry('580x500')
+
+
+x = 'Resume.pdf'
+howmany = int
+location = str
+masterInfo = []
+
+
+def callback(url):
+    webbrowser.open_new(url)
+
+# Aquire user data on button presses
+
+
+def sendingdata():
+    global masterInfo
+    global howmany
+    global location
+    masterInfo.clear()
+    data1 = enterFirst.get()
+    data2 = enterLast.get()
+    data3 = enterEmail.get()
+    data4 = enterPass.get()
+    data5 = enterSubject.get()
+    data6 = enterBody.get()
+    data7 = enterHowmany.get()
+
+    masterInfo.append(data1 + " " + data2)  # name
+    masterInfo.append(data3)  # email
+    masterInfo.append(data5)  # Subject
+    masterInfo.append(data4)  # email pass
+    masterInfo.append(x)  # resume location..
+    howmany = data7  # elemnts of list to iterate over ( g is variable)
+    masterInfo.append(data6)  # body of email
+
+    print('testing')
+    print('List:', masterInfo)
+
+
+def sendtestemail():
+    list1 = ["testemail@gmail.com",
+             "testemail@gmail.com", "testemail@gmail.com"]
+    for g in list1:
+        emm.sendingMail(masterInfo[0], masterInfo[1], masterInfo[2],
+                        masterInfo[3], x, g, masterInfo[5])
+    print('Testing function')
+    # ****** NEED TO CHANGE NAME OF PDF WHEN SENDING....
+
+
+def getresumefromfile(event=None):
+    filename = filedialog.askopenfilename()
+    print('Uploading your resume', filename)
+    global x
+    x = filename
+
+
+# Text to explain input boxes
+Label(goo, text='').grid(row=0)  # for empty place holder
+Label(goo, text='First Name').grid(row=1)
+Label(goo, text='Last Name').grid(row=2)
+Label(goo, text='Email(include @gmail.com)').grid(row=3)
+Label(goo, text='Email Password').grid(row=4)
+Label(goo, text='Subject of Email').grid(row=5)  # for empty place holder
+Label(goo, text='Body of Email').grid(row=6)
+Label(goo, text='Apply to 0-100 jobs').grid(row=7)
+Label(goo, text='').grid(row=8)  # for empty place holder
+
+
+# Links to support
+linkHelp1 = Label(
+    goo, text='Link to Enable 3rd Party apps in Gmail', fg="blue", cursor="hand1")
+linkHelp1.grid(row=12, column=1)
+linkHelp1.bind(
+    "<Button-1>", lambda e: callback("https://support.google.com/mail/thread/10206863?hl=en"))
+linkHelp2 = Label(
+    goo, text='Link for help installing Chromium Driver', fg="blue", cursor="hand1")
+linkHelp2.grid(row=13, column=1)
+linkHelp2.bind(
+    "<Button-1>", lambda e: callback("https://chromedriver.chromium.org/downloads"))
+
+# creates input boxes
+enterFirst = Entry(goo)
+enterLast = Entry(goo)
+enterEmail = Entry(goo)
+enterPass = Entry(goo)
+enterBody = Entry(goo, width='20')
+enterSubject = Entry(goo)
+enterHowmany = Spinbox(goo, from_=0, to=100)
+
+# arranges input boxes
+enterFirst.grid(row=1, column=1)
+enterLast.grid(row=2, column=1)
+enterEmail.grid(row=3, column=1)
+enterPass.grid(row=4, column=1)
+enterSubject.grid(row=5, column=1)
+# this needs work doesnt type from the center....
+enterBody.grid(row=6, column=1, padx=5, pady=0, ipady=40)
+enterHowmany.grid(row=7, column=1)
+
+3
+# Buttons to send emails
+buttonResumeGet = tk.Button(
+    goo, text='Upload a pdf Resume', command=getresumefromfile)
+buttonResumeGet.grid(row=9, column=1)
+buttonTest = tk.Button(
+    goo, text='Send a Test email to yourself', command=sendtestemail)
+buttonTest.grid(row=10, column=1)
+buttonSend = tk.Button(goo, text='Apply to jobs', command=sendingdata)
+buttonSend.grid(row=11, column=1)
+
+
+# __________________________________________________________
+# __________________________________________________________
+
+
+goo.mainloop()
