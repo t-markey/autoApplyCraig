@@ -1,8 +1,10 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import filedialog
+from tkinter import messagebox
 import webbrowser
 import emailtesting as emm
+from os import path
 
 goo = tk.Tk(className=' AutoCraig v 1.3')
 goo.geometry('580x500')
@@ -43,16 +45,30 @@ def sendingdata():
 
     print('testing')
     print('List:', masterInfo)
+    return
 
 
 def sendtestemail():
-    list1 = ["testemail@gmail.com",
-             "testemail@gmail.com", "testemail@gmail.com"]
+    sendingdata()
+    # checks to make sure a resume is uploaded before sending
+    if x == 'Resume.pdf':
+        tk.messagebox.showerror(
+            title=None, message='Please upload your Resume first before proceeding!')
+        print(enterFirst.get())
+        return
+    # makes sure all fields are filled in
+    # CAN ADD MORE MESSAGES TO FOCUS IN ON ISSUES, make sure @gmail is there
+    if enterFirst.get() == '' or enterLast.get() == '' or enterEmail.get() == '' or enterPass.get() == '' or enterSubject.get() == '' or enterBody.get() == '' or enterHowmany.get() == '0':
+        tk.messagebox.showwarning(
+            title=None, message='Fill in all of the fields before proceeding.')
+        return
+    # testing list..
+    list1 = [masterInfo[1], masterInfo[1], masterInfo[1]]
     for g in list1:
         emm.sendingMail(masterInfo[0], masterInfo[1], masterInfo[2],
                         masterInfo[3], x, g, masterInfo[5])
     print('Testing function')
-    # ****** NEED TO CHANGE NAME OF PDF WHEN SENDING....
+    print(path.basename(masterInfo[5]))
 
 
 def getresumefromfile(event=None):
@@ -60,6 +76,10 @@ def getresumefromfile(event=None):
     print('Uploading your resume', filename)
     global x
     x = filename
+
+
+def finalsend():
+    return
 
 
 # Text to explain input boxes
@@ -113,8 +133,10 @@ buttonResumeGet.grid(row=9, column=1)
 buttonTest = tk.Button(
     goo, text='Send a Test email to yourself', command=sendtestemail)
 buttonTest.grid(row=10, column=1)
-buttonSend = tk.Button(goo, text='Apply to jobs', command=sendingdata)
+buttonSend = tk.Button(goo, text='Apply to jobs', command=finalsend)
 buttonSend.grid(row=11, column=1)
+buttonExit = tk.Button(goo, text='Quit Program', command=goo.destroy)
+buttonExit.grid(row=14, column=1)
 
 
 # __________________________________________________________

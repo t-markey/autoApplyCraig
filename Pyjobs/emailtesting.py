@@ -3,6 +3,7 @@ from email.mime.text import MIMEText
 import smtplib
 from pathlib import Path
 from email.mime.application import MIMEApplication
+from os import path
 # with help from codewithmosh.com
 # and http://linuxcursor.com/python-programming/06-how-to-send-pdf-ppt-attachment-with-html-body-in-python-script
 
@@ -19,7 +20,7 @@ def sendingMail(yourName, yourEmail, namePostingSubject, yourPassword, yourResum
         attach = MIMEApplication(f.read(), _subtype="pdf")
         # **** PLAY WITH THIS TO FIX NAME OF PDF BEING SENT
         attach.add_header('Content-Disposition',
-                          'attachment', filename=yourResume)
+                          'attachment', filename=path.basename(yourResume))
         testingEmail.attach(attach)
 
     with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:

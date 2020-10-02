@@ -79,7 +79,7 @@ print("Number of emails aquired: ", len(emails))
 
 
 # this takes arguments for your name, email , subject, password, resume name, sendee(supplied as g)
-for g in emails:
-    e.sendingMail("tom", "YOUREMAIL@gmail.com", "Applying to your Posting",
-                  "YOURPASSWORD", "samples.pdf", g)
-    print("Sent resume to", g)
+# for g in emails:
+#     e.sendingMail("tom", "YOUREMAIL@gmail.com", "Applying to your Posting",
+#                   "YOURPASSWORD", "samples.pdf", g)
+#     print("Sent resume to", g)
