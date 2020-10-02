@@ -7,7 +7,16 @@ import requests
 from selenium.common.exceptions import NoSuchElementException
 import emailtesting as e
 import sys
-browser = webdriver.Chrome()
+from selenium.webdriver.chrome.options import Options
+
+# this cloaks chrome so no window opens
+WINDOW_SIZE = "10,10"
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
+browser = webdriver.Chrome(chrome_options=chrome_options)
+# use this for watching automation
+#browser = webdriver.Chrome()
 
 
 class Apply:
@@ -15,7 +24,7 @@ class Apply:
     def closing(self, timeOpen):
         print(f"Closing Chrome in {timeOpen}seconds...")
         time.sleep(timeOpen)
-        browser.quit()
+        browser.quit()  # or close?
         return
         # function to set value of how long browser takes to close
 
@@ -39,6 +48,7 @@ class Apply:
          # lets input of how many postings to apply for , starts top of page
         else:
             print("no input")
+            return
         while x < (numberPostings - 1):
             # prints index , identifier, and link
             # print(x+1, jobs[x].get("data-pid", 0), name[x].get("href"))
@@ -58,7 +68,7 @@ class Apply:
                     # delay to allow pressing
                     email = browser.find_element_by_class_name("mailapp")
                     # find the emaail in anchor element
-                    # print(email.text)
+                    print(email.text)
                     print("Email Aquired")
                     # prints the text contained in the email link
                     emailList.append(email.text)
@@ -70,12 +80,12 @@ class Apply:
         return noRepeat
 
 
-a = Apply()
-a.scrapePosting(
-    "https://newyork.craigslist.org/d/food-beverage-hospitality/search/fbh")
-emails = a.getEmails(4)
-a.closing(2)
-print("Number of emails aquired: ", len(emails))
+# a = Apply()
+# a.scrapePosting(
+#     "https://newyork.craigslist.org/d/food-beverage-hospitality/search/fbh")
+# emails = a.getEmails(4)
+# a.closing(2)
+# print("Number of emails aquired: ", len(emails))
 
 
 # this takes arguments for your name, email , subject, password, resume name, sendee(supplied as g)
