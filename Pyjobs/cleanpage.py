@@ -69,6 +69,7 @@ class Apply:
                     email = browser.find_element_by_class_name("mailapp")
                     # find the emaail in anchor element
                     print(email.text)
+
                     print("Email Aquired")
                     # prints the text contained in the email link
                     emailList.append(email.text)

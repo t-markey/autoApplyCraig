@@ -8,7 +8,8 @@ from selenium.common.exceptions import NoSuchElementException
 import emailtesting as e
 import sys
 
-
+# used to get all possible links for all regions on craigslist
+# also returns chrome back to non headless.....
 browser = webdriver.Chrome()
 
 
