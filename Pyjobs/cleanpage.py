@@ -8,15 +8,20 @@ from selenium.common.exceptions import NoSuchElementException
 import emailtesting as e
 import sys
 from selenium.webdriver.chrome.options import Options
+# trying this
+from webdriver_manager.chrome import ChromeDriverManager
 
 # this cloaks chrome so no window opens
 WINDOW_SIZE = "10,10"
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
-browser = webdriver.Chrome(chrome_options=chrome_options)
+#browser = webdriver.Chrome(chrome_options=chrome_options)
 # use this for watching automation
-#browser = webdriver.Chrome()
+
+# use this for watching automation
+# use this if issues with chrome driver updating
+browser = webdriver.Chrome(ChromeDriverManager().install())
 
 
 class Apply:
@@ -80,6 +85,8 @@ class Apply:
         # uses sets to exclude repeat emails
         return noRepeat
 
+
+# =================================For testing purposes
 
 # a = Apply()
 # a.scrapePosting(

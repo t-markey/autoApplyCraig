@@ -4,8 +4,6 @@ import smtplib
 from pathlib import Path
 from email.mime.application import MIMEApplication
 from os import path
-# with help from codewithmosh.com
-# and http://linuxcursor.com/python-programming/06-how-to-send-pdf-ppt-attachment-with-html-body-in-python-script
 
 
 def sendingMail(yourName, yourEmail, namePostingSubject, yourPassword, yourResume, sendingTo, bodyBody):
@@ -18,7 +16,7 @@ def sendingMail(yourName, yourEmail, namePostingSubject, yourPassword, yourResum
     with open(yourResume, "rb") as f:
         # attach = email.mime.application.MIMEApplication(f.read(),_subtype="pdf")
         attach = MIMEApplication(f.read(), _subtype="pdf")
-        # **** PLAY WITH THIS TO FIX NAME OF PDF BEING SENT
+        # Header of email
         attach.add_header('Content-Disposition',
                           'attachment', filename=path.basename(yourResume))
         testingEmail.attach(attach)
@@ -32,7 +30,7 @@ def sendingMail(yourName, yourEmail, namePostingSubject, yourPassword, yourResum
         smtp.send_message(testingEmail)
         print("sent email....")
 
-
+# ============================For testing email credentials
 # use this to test before going live, sub practice email with your own
 # list = ["testemails@gmail.com",
 #         "testemail@gmail.com", "testemail@gmail.com"]

@@ -9,16 +9,21 @@ from os import path
 import cleanpage as cl
 import uslinks
 import time
+from PIL import ImageTk, Image
+
 
 goo = tk.Tk(className=' AutoCraig 4000')
-goo.geometry('560x600')
-
+goo.geometry('560x660')
+canvas = Canvas(goo, width=200, height=80)
+canvas.grid(row=0, column=1)
 
 x = 'Resume.pdf'
 howmany = 4
 location = str
 masterInfo = []
 regions = uslinks.regionalUsList
+img = PhotoImage(file="autocraig4000.png")
+canvas.create_image(0, 0, anchor=NW, image=img)
 
 
 def callback(url):
@@ -66,7 +71,7 @@ def sendingdata():
     masterInfo.append(data6)  # body of email
     location = data8
     print('testing')
-    print('List:', masterInfo)
+    #print('List:', masterInfo)
     print(location)
     return
 
@@ -122,16 +127,17 @@ def finalsend():
         "https://" + location + ".craigslist.org/d/food-beverage-hospitality/search/fbh")
     emails = a.getEmails(int(howmany))
     print("Number of emails aquired: ", len(emails))
-    # for g in emails:
-    #     emm.sendingMail(masterInfo[0], masterInfo[1], masterInfo[2],
-    #                     masterInfo[3], x, g, masterInfo[5])
+    send to all
+    for g in emails:
+        emm.sendingMail(masterInfo[0], masterInfo[1], masterInfo[2],
+                        masterInfo[3], x, g, masterInfo[5])
     a.closing(2)
 
     return
 
 
 def sendtoallofus():
-    howmany = 3  # CHANGE TO 100 FOR FINAL___________________________________________++
+    howmany = 100  # can change to less for testing
     sendingdata()
     for allofit in uslinks.regionalUsList:
         location = allofit
@@ -141,9 +147,9 @@ def sendtoallofus():
             "https://" + location + ".craigslist.org/d/food-beverage-hospitality/search/fbh")
         emails = a.getEmails(int(howmany))
         print("Number of emails aquired: ", len(emails))
-        # for g in emails:
-        #     emm.sendingMail(masterInfo[0], masterInfo[1], masterInfo[2],
-        #                     masterInfo[3], x, g, masterInfo[5])
+        for g in emails:
+            emm.sendingMail(masterInfo[0], masterInfo[1], masterInfo[2],
+                            masterInfo[3], x, g, masterInfo[5])
 
     a.closing(2)
     return
@@ -179,8 +185,8 @@ linkHelp2.bind(
 # creates input boxes
 enterFirst = Entry(goo)
 enterLast = Entry(goo)
-enterEmail = Entry(goo)
-enterPass = Entry(goo)
+enterEmail = Entry(goo, show="*")
+enterPass = Entry(goo, show="*")
 enterBody = Entry(goo, width='20')
 enterSubject = Entry(goo)
 enterHowmany = Spinbox(goo, from_=1, to=100)

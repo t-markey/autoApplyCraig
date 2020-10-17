@@ -1,2 +1,4 @@
 allthelinks.py
 __pycache__
+/.vscode
+**/logs
