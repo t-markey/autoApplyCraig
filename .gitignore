@@ -1,0 +1,7 @@
+allthelinks.py
+__pycache__/
+.vscode/
+**/logs
+**.DS_Store
+settings.json
+.DS_Store
