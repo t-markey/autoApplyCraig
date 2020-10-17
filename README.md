@@ -11,7 +11,9 @@ AutoCraig 4000 is a tool to automate emails to prospective employers. Specifical
 * Send a test email to yourself
 * Select a specific region to target
 
+## Examples
 
+![GUI](/Pyjobs/examples/autocraig.png)
 
 
 
