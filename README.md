@@ -14,6 +14,7 @@ AutoCraig 4000 is a tool to automate emails to prospective employers. Specifical
 ## Examples
 
 ![GUI](/Pyjobs/examples/autocraig.png)
+![GUI](/Pyjobs/examples/autocraig.gif)
 
 
 
